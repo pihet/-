@@ -1,5 +1,6 @@
 using Cinemachine;
 using StarterAssets;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public class PlayerManager : MonoBehaviour
@@ -27,11 +28,21 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private Rig aimRig;
 
+    [Header("Weapon Sound Effect")]
+    [SerializeField]
+    private AudioClip shootingSound;
+    [SerializeField]
+    private AudioClip reroadSound;
+    private AudioSource weaponSound;
+
+    private Enemy enemy;
+
     void Start()
     {
         input = GetComponent<StarterAssetsInputs>();
         controller = GetComponent<ThirdPersonController>();
         anim = GetComponent<Animator>();
+        weaponSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -78,6 +89,8 @@ public class PlayerManager : MonoBehaviour
                 //Debug.Log("Name : " + hit.transform.gameObject.name);
                 targetPosition = hit.point;
                 aimObject.transform.position = hit.point;
+
+                enemy = hit.collider.gameObject.GetComponent<Enemy>();
             }
             else
             {
@@ -93,6 +106,7 @@ public class PlayerManager : MonoBehaviour
             if (input.shoot)
             {
                 anim.SetBool("Shoot", true);
+                GameManager.instance.Shooting(targetPosition, enemy, weaponSound, shootingSound);
             }
             else
             {
@@ -120,11 +134,35 @@ public class PlayerManager : MonoBehaviour
         controller.isReload = false;
         SetRigWeight(1);
         anim.SetLayerWeight(1, 0);
+        /*
+        PlayWeaponSound(reroadSound[2]);
+        */
     }
 
     private void SetRigWeight(float weight)
     {
         aimRig.weight = weight;
         handRig.weight = weight;
+    }
+
+    public void ReroadWeaponClip()
+    {
+        GameManager.instance.ReroadClip();
+        /*
+        PlayWeaponSound(reroadSound[0]);
+        */
+    }
+
+    public void ReroadInsertClip()
+    {
+        /*
+        PlayWeaponSound(reroadSound[1]);
+        */
+    }
+
+    private void PlayWeaponSound(AudioClip sound)
+    {
+        weaponSound.clip = sound;
+        weaponSound.Play();
     }
 }
