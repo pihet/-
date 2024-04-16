@@ -44,7 +44,7 @@ public class BulletManager : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy>().enemyCurrentHP -= 1;
+            other.gameObject.GetComponent<Enemy>().enemyCurruntHP -= 1;
         }
         DestoryBullet();
     }
