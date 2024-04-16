@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1134,6 +1134,37 @@ Transform:
   - {fileID: 1211554894}
   m_Father: {fileID: 1253465379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &544960702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544960703}
+  m_Layer: 0
+  m_Name: KnifeHandIk_hint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &544960703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544960702}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.44604346, y: 1.4879276, z: -0.041095395}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 806745243}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &566335119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1889,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2038647168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &806745242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806745243}
+  - component: {fileID: 806745244}
+  m_Layer: 8
+  m_Name: KnifeHandIk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &806745243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806745242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 544960703}
+  m_Father: {fileID: 1297256311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &806745244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806745242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_Root: {fileID: 1642476249}
+    m_Mid: {fileID: 239997729}
+    m_Tip: {fileID: 1253465379}
+    m_Target: {fileID: 1966656482}
+    m_Hint: {fileID: 544960703}
+    m_TargetPositionWeight: 1
+    m_TargetRotationWeight: 1
+    m_HintWeight: 1
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &814937895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,6 +2054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864068278}
   serializedVersion: 2
+<<<<<<< HEAD
   m_LocalRotation: {x: -0.75440645, y: -0.1116189, z: -0.6330223, w: 0.13302213}
   m_LocalPosition: {x: -0.08269997, y: 0.098799974, z: -0.1649999}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1973,6 +2062,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1341791718}
   m_LocalEulerAnglesHint: {x: 200, y: 280, z: 0}
+=======
+  m_LocalRotation: {x: -0.9970467, y: 0.047884237, z: -0.036972463, w: 0.04730885}
+  m_LocalPosition: {x: -0.2207, y: 0.098, z: 0.0098}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1966656482}
+  m_Father: {fileID: 1253465379}
+  m_LocalEulerAnglesHint: {x: 185.209, y: 355.49298, z: 5.7039948}
+>>>>>>> 76d1a6c3916d4bb3085e4329e196aa587b266c15
 --- !u!64 &864346105
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3066,6 +3165,22 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+  - m_Transform: {fileID: 1966656482}
+    m_Style:
+      shape: {fileID: 4300000, guid: 687b70eb9c49243639f9379f6965034f, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
+  - m_Transform: {fileID: 544960703}
+    m_Style:
+      shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
 --- !u!4 &1297256311
 Transform:
   m_ObjectHideFlags: 0
@@ -3081,6 +3196,7 @@ Transform:
   m_Children:
   - {fileID: 687555262}
   - {fileID: 2038647168}
+  - {fileID: 806745243}
   m_Father: {fileID: 5976754609344898238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1297268845
@@ -6108,6 +6224,37 @@ Transform:
   - {fileID: 116028234}
   m_Father: {fileID: 1304137512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1966656481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966656482}
+  m_Layer: 0
+  m_Name: Knife Hand IK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1966656482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966656481}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.4929449, y: 0.6030509, z: 0.48629302, w: -0.39604807}
+  m_LocalPosition: {x: -0.009, y: -0.604, z: -2.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 864346104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970489608
 GameObject:
   m_ObjectHideFlags: 0
@@ -6845,7 +6992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &731299427947096025
 MeshFilter:
   m_ObjectHideFlags: 0
