@@ -9,7 +9,6 @@ public class PlayerManager : MonoBehaviour
     private ThirdPersonController controller;
     private Animator anim;
 
-
     [Header("Aim")]
     [SerializeField]
     private CinemachineVirtualCamera aimCam;
@@ -39,6 +38,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("WeaponHolder").GetComponent<NewBehaviourScript>();
         input = GetComponent<StarterAssetsInputs>();
         controller = GetComponent<ThirdPersonController>();
         anim = GetComponent<Animator>();
@@ -50,7 +50,16 @@ public class PlayerManager : MonoBehaviour
     {
         AimCheck();
 
+        if (NewBehaviourScript.selectedWeapon == 0)
+        {
+            anim.SetInteger("switch weapon", 0);
+        }
+        else if (NewBehaviourScript.selectedWeapon == 1)
+        {
+            anim.SetInteger("switch weapon", 1);
+        }
     }
+            
     private void AimCheck()
     {
         if (input.reload)

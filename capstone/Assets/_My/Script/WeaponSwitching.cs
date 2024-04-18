@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public int selectedWeapon = 0;
+    public static int selectedWeapon = 0;
 
     void Start()
     {
