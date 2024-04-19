@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private int enemySpawnCount = 0;
+    private int maxEnemySpawnCount = 10;
 
     [Header("Bullet")]
     [SerializeField]
@@ -34,6 +36,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject weaponClipFX;
 
+    [Header("Enemy")]
+    [SerializeField]
+    private GameObject enemy;
+    [SerializeField]
+    private GameObject[] spawnPoint;
+
     void Start()
     {
         instance = this;
@@ -41,6 +49,8 @@ public class GameManager : MonoBehaviour
         curruntShootDelay = 0;
 
         InitBullet();
+
+        StartCoroutine(EnemySpawn());
     }
 
     // Update is called once per frame
@@ -83,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         //Raycast
         /*
-        if(enemy ¡Á null && enemy.enemyCurrentHP > 0)
+        if(enemy ï¿½ï¿½ null && enemy.enemyCurrentHP > 0)
         {
             enemy.enemyCurrentHP -= 1;
             Debug.Log("enemy HP :" + enemy.enemyCurrentHP);
@@ -107,5 +117,17 @@ public class GameManager : MonoBehaviour
     private void SetObjPosition(GameObject obj, Transform targetTransform)
     {
         obj.transform.position = targetTransform.position;
+    }
+
+    IEnumerator EnemySpawn()
+    {
+        if(enemySpawnCount < maxEnemySpawnCount){
+            Instantiate(enemy, spawnPoint[Random.Range(0,spawnPoint.Length)].transform.position, Quaternion.identity);
+            enemySpawnCount++;
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(EnemySpawn());
     }
 }
