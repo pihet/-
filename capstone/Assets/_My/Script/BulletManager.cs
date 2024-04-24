@@ -22,18 +22,18 @@ public class BulletManager : MonoBehaviour
 
         if(destroyTime <= 0)
         {
-            DestoryBullet(); 
+            DestroyBullet();
         }
 
-        BulletMove();
+        BullectMove();
     }
 
-    private void BulletMove()
+    private void BullectMove()
     {
         bulletRigidbody.velocity = transform.forward * moveSpeed;
     }
 
-    private void DestoryBullet()
+    private void DestroyBullet()
     {
         //Destroy(gameObject);
         gameObject.SetActive(false);
@@ -46,6 +46,6 @@ public class BulletManager : MonoBehaviour
         {
             other.gameObject.GetComponent<Enemy>().enemyCurruntHP -= 1;
         }
-        DestoryBullet();
+        DestroyBullet();
     }
 }

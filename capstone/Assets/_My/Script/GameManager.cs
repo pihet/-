@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -22,11 +23,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text bulletText;
     private int maxBullet = 30;
-    private int currentBullet = 0;
+    private int curruntBullet = 0;
 
-    [Header("Weapon Fx")]
+    [Header("Weapon FX")]
     [SerializeField]
-    private GameObject weaponFlashFX;
+    private GameObject weaponFlashFx;
     [SerializeField]
     private Transform bulletCasePoint;
     [SerializeField]
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform weaponClipPoint;
     [SerializeField]
-    private GameObject weaponClipFX;
+    private GameObject weaponClipFx;
 
     [Header("Enemy")]
     [SerializeField]
@@ -48,70 +49,56 @@ public class GameManager : MonoBehaviour
 
         curruntShootDelay = 0;
 
+        curruntBullet = 0;
+
         InitBullet();
 
         StartCoroutine(EnemySpawn());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        bulletText.text = currentBullet + " / " + maxBullet;
+        bulletText.text = curruntBullet + " / " + maxBullet;
     }
 
-    public void Shooting(Vector3 targetPosition, Enemy enemy, AudioSource weaponSound, AudioClip shootingSound)
+    public void Shooting(Vector3 targetPosition, Enemy enemy)
     {
         curruntShootDelay += Time.deltaTime;
 
-        if (curruntShootDelay < maxShootDelay || currentBullet <= 0)
+        if (curruntShootDelay < maxShootDelay || curruntBullet <= 0)
             return;
 
-        currentBullet -= 1;
+        curruntBullet -= 1;
         curruntShootDelay = 0;
-
-        weaponSound.clip = shootingSound;
-        weaponSound.Play();
-
         Vector3 aim = (targetPosition - bulletPoint.position).normalized;
 
-        //Instantiate(weaponFlashFX, bulletPoint);
-        Instantiate(weaponFlashFX, bulletPoint);
+        //Instantiate(weaponFlashFx,bulletPoint);
         GameObject flashFX = PoolManager.instance.ActivateObj(1);
-        SetObjPosition(flashFX, bulletPoint);
-        flashFX.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
+        SetObjPosition(flashFX,bulletPoint);
+        flashFX.transform.rotation = Quaternion.LookRotation(aim,Vector3.up);
 
         //Instantiate(bulletCaseFX, bulletCasePoint);
         GameObject caseFX = PoolManager.instance.ActivateObj(2);
-        SetObjPosition(caseFX, bulletCasePoint);
+        SetObjPosition(caseFX,bulletCasePoint);
 
-        //Instantiate(bulletObj, bulletPoint.position, Quaternion.LookRotation(aim, Vector3.up));
-        
-        GameObject prefabToSpawn = PoolManager.instance.ActivateObj(0);
-        SetObjPosition(prefabToSpawn, bulletPoint);
-        prefabToSpawn.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
-        
-
-        //Raycast
-        /*
-        if(enemy �� null && enemy.enemyCurrentHP > 0)
-        {
-            enemy.enemyCurrentHP -= 1;
-            Debug.Log("enemy HP :" + enemy.enemyCurrentHP);
-        }
-        */
+        //Instantiate(bulletObj,bulletPoint.position, Quaternion.LookRotation(aim,Vector3.up));
+        GameObject prefabTospawn = PoolManager.instance.ActivateObj(0);
+        SetObjPosition(prefabTospawn,bulletPoint);
+        prefabTospawn.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }
 
     public void ReroadClip()
     {
-        //Instantiate(weaponClipFX, weaponClipPoint);
-        GameObject clipFX = PoolManager.instance.ActivateObj(3);
-        SetObjPosition(clipFX, weaponClipPoint);
+        //Instantiate(weaponClipFx, weaponClipPoint);
+        GameObject clipFx = PoolManager.instance.ActivateObj(3);
+        SetObjPosition(clipFx,weaponClipPoint);
 
         InitBullet();
     }
+    
     private void InitBullet()
     {
-        currentBullet = maxBullet;
+        curruntBullet = maxBullet;
     }
 
     private void SetObjPosition(GameObject obj, Transform targetTransform)
@@ -130,4 +117,5 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(EnemySpawn());
     }
+
 }

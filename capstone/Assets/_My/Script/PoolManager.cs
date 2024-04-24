@@ -42,11 +42,14 @@ public class PoolManager : MonoBehaviour
 
         for (int i = 0; i < objPools[index].Count; i++)
         {
-            if (!objPools[index][i].activeInHierarchy)
+            if (objPools[index][i] != null && objPools[index][i])
             {
-                obj = objPools[index][i];
-                obj.SetActive(true);
-                return obj;
+                if (!objPools[index][i].activeInHierarchy)
+                {
+                    obj = objPools[index][i];
+                    obj.SetActive(true);
+                    return obj;
+                }
             }
         }
 
