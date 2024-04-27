@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     private float enemyMaxHP = 10;
     public float enemyCurruntHP = 0;
+    private float hp = 10;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -32,7 +33,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (hp > enemyCurruntHP)
+        {
+            animator.SetTrigger("Hit");
+            hp -= 1;
+        }
         if (enemyCurruntHP <= 0)
         {
             StartCoroutine(EnemyDie());
@@ -80,7 +85,7 @@ public class Enemy : MonoBehaviour
         enemyCollider.enabled = false;
 
         yield return new WaitForSeconds(3f);
-        //Destroy(gameObject);        
+        Destroy(gameObject);        
         gameObject.SetActive(false);
         InitEnemyHP();
         agent.speed = 1;
