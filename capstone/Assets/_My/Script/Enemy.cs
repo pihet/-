@@ -61,12 +61,12 @@ public class Enemy : MonoBehaviour
 
             if (isRange)
             {
-                animator.SetBool("isRun", false); // Á¤ÁöÇÑ ÈÄ °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç ½ÇÇà
+                animator.SetBool("isRun", false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
                 animator.SetTrigger("Attack");
             }
             else
             {
-                animator.SetBool("isRun", true); // ÀÌµ¿ ÁßÀÎ °æ¿ì "zombie running" ¾Ö´Ï¸ÞÀÌ¼Ç ½ÇÇà
+                animator.SetBool("isRun", true); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ "zombie running" ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
                 animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
             }
             targetDealay = 0;
@@ -91,4 +91,21 @@ public class Enemy : MonoBehaviour
         agent.speed = 1;
         enemyCollider.enabled = true;
     }
+    private void OnCollisionEnter(Collision collision)
+{
+    if(collision.gameObject.CompareTag("Player"))
+    {
+        Player playerComponent = collision.gameObject.GetComponent<Player>();
+
+        if(playerComponent != null)
+        {
+            playerComponent.playerCurrentHP -= 1;
+            
+            if(playerComponent.playerCurrentHP <= 0)
+            {
+                playerComponent.playerCurrentHP = 0;
+            }
+        }
+    }
+}
 }
