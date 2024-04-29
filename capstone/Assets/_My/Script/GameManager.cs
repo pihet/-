@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         bulletText.text = curruntBullet + " / " + maxBullet;
     }
 
-    public void Shooting(Vector3 targetPosition, Enemy enemy)
+    public void Shooting(Vector3 targetPosition, Enemy enemy, AudioSource weaponSound, AudioClip shootingSound)
     {
         curruntShootDelay += Time.deltaTime;
 
@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
 
         curruntBullet -= 1;
         curruntShootDelay = 0;
+
+        weaponSound.clip = shootingSound;
+        weaponSound.Play();
+
         Vector3 aim = (targetPosition - bulletPoint.position).normalized;
 
         //Instantiate(weaponFlashFx,bulletPoint);
