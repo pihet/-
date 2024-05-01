@@ -1,20 +1,20 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-
     private float enemyMaxHP = 10;
-    public float enemyCurruntHP = 0;
+    public float enemyCurrentHP = 0;
     private float hp = 10;
 
     private NavMeshAgent agent;
     private Animator animator;
 
     private GameObject targetPlayer;
-    private float targetDealay = 0.5f;
+    private float targetDelay = 0.5f;
 
     private CapsuleCollider enemyCollider;
 
@@ -33,12 +33,15 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hp > enemyCurruntHP)
+        if (!GameManager.instance.isLive)
+            return;
+
+        if (hp > enemyCurrentHP)
         {
             animator.SetTrigger("Hit");
             hp -= 1;
         }
-        if (enemyCurruntHP <= 0)
+        if (enemyCurrentHP <= 0)
         {
             StartCoroutine(EnemyDie());
             return;
@@ -46,10 +49,10 @@ public class Enemy : MonoBehaviour
 
         if (targetPlayer != null)
         {
-            float maxDealay = 0.5f;
-            targetDealay += Time.deltaTime;
+            float maxDelay = 0.5f;
+            targetDelay += Time.deltaTime;
 
-            if (targetDealay < maxDealay)
+            if (targetDelay < maxDelay)
             {
                 return;
             }
@@ -61,25 +64,28 @@ public class Enemy : MonoBehaviour
 
             if (isRange)
             {
-                animator.SetBool("isRun", false); // ������ �� ���� �ִϸ��̼� ����
+                animator.SetBool("isRun", false);
                 animator.SetTrigger("Attack");
             }
             else
             {
-                animator.SetBool("isRun", true); // �̵� ���� ��� "zombie running" �ִϸ��̼� ����
+                animator.SetBool("isRun", true);
                 animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
             }
-            targetDealay = 0;
+            targetDelay = 0;
         }
     }
 
     private void InitEnemyHP()
     {
-        enemyCurruntHP = enemyMaxHP;
+        enemyCurrentHP = enemyMaxHP;
     }
 
     IEnumerator EnemyDie()
     {
+        if (!GameManager.instance.isLive)
+            yield break;
+
         agent.speed = 0;
         animator.SetTrigger("Dead");
         enemyCollider.enabled = false;
@@ -91,21 +97,30 @@ public class Enemy : MonoBehaviour
         agent.speed = 1;
         enemyCollider.enabled = true;
     }
-    private void OnCollisionEnter(Collision collision)
-{
-    if(collision.gameObject.CompareTag("Player"))
-    {
-        Player playerComponent = collision.gameObject.GetComponent<Player>();
 
-        if(playerComponent != null)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!GameManager.instance.isLive)
+            return;
+
+        if (collision.gameObject.CompareTag("Player"))
         {
-            playerComponent.playerCurrentHP -= 1;
-            
-            if(playerComponent.playerCurrentHP <= 0)
+            Player playerComponent = collision.gameObject.GetComponent<Player>();
+
+            if (playerComponent != null)
             {
-                playerComponent.playerCurrentHP = 0;
+                playerComponent.playerCurrentHP -= 1;
+
+                if (playerComponent.playerCurrentHP <= 0)
+                {
+                    GameManager.instance.isLive = false;
+                    Invoke("EndScene", 3f);
+                }
             }
         }
     }
-}
+        public void EndScene()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

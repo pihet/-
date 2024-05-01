@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Change : MonoBehaviour
+public class EndScene : MonoBehaviour
 {
     public void SceneChange()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

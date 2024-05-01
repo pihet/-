@@ -217,6 +217,10 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
+            if(GameManager.instance.isLive == false){
+                SprintSpeed = 0;
+                MoveSpeed = 0;
+            }
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
             if (isAimMove || isReload)

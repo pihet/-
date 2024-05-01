@@ -38,6 +38,8 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        if(!GameManager.instance.isLive)
+            return;
         GameObject.Find("WeaponHolder").GetComponent<NewBehaviourScript>();
         input = GetComponent<StarterAssetsInputs>();
         controller = GetComponent<ThirdPersonController>();
@@ -48,6 +50,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GameManager.instance.isLive)
+            return;
+
         AimCheck();
 
         if (NewBehaviourScript.selectedWeapon == 0)

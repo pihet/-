@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private int enemySpawnCount = 0;
     private int maxEnemySpawnCount = 10;
+
+    [Header("Game Control")]
+    public bool isLive;
+    public float gameTime;
+    public float maxGameTime = 2 * 10f;
 
     [Header("Bullet")]
     [SerializeField]
@@ -45,6 +54,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
+        isLive = true;
+
         instance = this;
 
         curruntShootDelay = 0;
@@ -59,10 +71,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         bulletText.text = curruntBullet + " / " + maxBullet;
+
+        gameTime += Time.deltaTime;
+        
+        if(gameTime > maxGameTime){
+            gameTime = maxGameTime;
+        }
     }
 
     public void Shooting(Vector3 targetPosition, Enemy enemy, AudioSource weaponSound, AudioClip shootingSound)
     {
+        if(!isLive)
+            return;
+
         curruntShootDelay += Time.deltaTime;
 
         if (curruntShootDelay < maxShootDelay || curruntBullet <= 0)
@@ -93,6 +114,8 @@ public class GameManager : MonoBehaviour
 
     public void ReroadClip()
     {
+        if(!isLive)
+            return;
         //Instantiate(weaponClipFx, weaponClipPoint);
         GameObject clipFx = PoolManager.instance.ActivateObj(3);
         SetObjPosition(clipFx,weaponClipPoint);
@@ -112,6 +135,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EnemySpawn()
     {
+        if (!isLive)
+            yield break;
+
         if(enemySpawnCount < maxEnemySpawnCount){
             Instantiate(enemy, spawnPoint[Random.Range(0,spawnPoint.Length)].transform.position, Quaternion.identity);
             enemySpawnCount++;
@@ -121,5 +147,4 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(EnemySpawn());
     }
-
 }
