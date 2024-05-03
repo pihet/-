@@ -36,7 +36,7 @@ public class EnenmyAttack : MonoBehaviour
                 }
                 if (playerComponent.isInvincible == false)
                 {
-                    Debug.Log("Hit");
+                    //Debug.Log("Hit");
                     playerComponent.playerCurrentHP -= 1;
                 }
             }
