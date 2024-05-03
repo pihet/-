@@ -7,6 +7,8 @@ namespace StarterAssets
 {
     public class StarterAssetsInputs : MonoBehaviour
     {
+        Player _player;
+
         [Header("Character Input Values")]
         public Vector2 move;
         public Vector2 look;
@@ -26,7 +28,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
         {
-            if (GameManager.instance.isLive)
+            if (GameManager.instance.isLive && GetComponent<CharacterController>().enabled == true)
             {
                 MoveInput(value.Get<Vector2>());
             }
@@ -34,7 +36,7 @@ namespace StarterAssets
 
         public void OnLook(InputValue value)
         {
-            if (GameManager.instance.isLive && cursorInputForLook)
+            if (GameManager.instance.isLive)
             {
                 LookInput(value.Get<Vector2>());
             }

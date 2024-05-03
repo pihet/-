@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private float targetDelay = 0.5f;
 
     private CapsuleCollider enemyCollider;
+    private BoxCollider handCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyCollider = GetComponent<CapsuleCollider>();
+        handCollider = GetComponentInChildren<BoxCollider>();
 
         targetPlayer = GameObject.FindWithTag("Player");
 
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour
             if (isRange)
             {
                 animator.SetBool("isRun", false);
-                animator.SetTrigger("Attack");
+                StartCoroutine(ChangeSpeedAfterDelay(2f, 2.5f));
             }
             else
             {
@@ -98,29 +100,18 @@ public class Enemy : MonoBehaviour
         enemyCollider.enabled = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    IEnumerator ChangeSpeedAfterDelay(float delay, float newSpeed)
     {
-        if (!GameManager.instance.isLive)
-            return;
+        // agent의 속도를 0으로 설정
+        agent.speed = 0;
+        handCollider.enabled = true;
+        animator.SetTrigger("Attack");
 
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player playerComponent = collision.gameObject.GetComponent<Player>();
+        // delay초 동안 대기
+        yield return new WaitForSeconds(delay);
 
-            if (playerComponent != null)
-            {
-                playerComponent.playerCurrentHP -= 1;
-
-                if (playerComponent.playerCurrentHP <= 0)
-                {
-                    GameManager.instance.isLive = false;
-                    Invoke("EndScene", 3f);
-                }
-            }
-        }
-    }
-        public void EndScene()
-    {
-        SceneManager.LoadScene(2);
+        // delay가 지난 후 agent의 속도를 newSpeed로 변경
+        agent.speed = newSpeed;
+        handCollider.enabled = false;
     }
 }

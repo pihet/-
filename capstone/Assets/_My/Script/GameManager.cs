@@ -49,16 +49,15 @@ public class GameManager : MonoBehaviour
     [Header("Enemy")]
     [SerializeField]
     private GameObject enemy;
-    [SerializeField]
+    [SerializeField] 
     private GameObject enemyType2;
-    [SerializeField]
+    [SerializeField] 
     private GameObject enemyType3;
     [SerializeField]
     private GameObject[] spawnPoint;
 
     void Start()
     {
-
         isLive = true;
 
         instance = this;
@@ -77,16 +76,15 @@ public class GameManager : MonoBehaviour
         bulletText.text = curruntBullet + " / " + maxBullet;
 
         gameTime += Time.deltaTime;
-
-        if (gameTime > maxGameTime)
-        {
+        
+        if(gameTime > maxGameTime){
             gameTime = maxGameTime;
         }
     }
 
     public void Shooting(Vector3 targetPosition, Enemy enemy, AudioSource weaponSound, AudioClip shootingSound)
     {
-        if (!isLive)
+        if(!isLive)
             return;
 
         curruntShootDelay += Time.deltaTime;
@@ -104,30 +102,30 @@ public class GameManager : MonoBehaviour
 
         //Instantiate(weaponFlashFx,bulletPoint);
         GameObject flashFX = PoolManager.instance.ActivateObj(1);
-        SetObjPosition(flashFX, bulletPoint);
-        flashFX.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
+        SetObjPosition(flashFX,bulletPoint);
+        flashFX.transform.rotation = Quaternion.LookRotation(aim,Vector3.up);
 
         //Instantiate(bulletCaseFX, bulletCasePoint);
         GameObject caseFX = PoolManager.instance.ActivateObj(2);
-        SetObjPosition(caseFX, bulletCasePoint);
+        SetObjPosition(caseFX,bulletCasePoint);
 
         //Instantiate(bulletObj,bulletPoint.position, Quaternion.LookRotation(aim,Vector3.up));
         GameObject prefabTospawn = PoolManager.instance.ActivateObj(0);
-        SetObjPosition(prefabTospawn, bulletPoint);
+        SetObjPosition(prefabTospawn,bulletPoint);
         prefabTospawn.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }
 
     public void ReroadClip()
     {
-        if (!isLive)
+        if(!isLive)
             return;
         //Instantiate(weaponClipFx, weaponClipPoint);
         GameObject clipFx = PoolManager.instance.ActivateObj(3);
-        SetObjPosition(clipFx, weaponClipPoint);
+        SetObjPosition(clipFx,weaponClipPoint);
 
         InitBullet();
     }
-
+    
     private void InitBullet()
     {
         curruntBullet = maxBullet;
@@ -164,16 +162,12 @@ public class GameManager : MonoBehaviour
                     enemyPrefab = enemy;
                     break;
             }
-
-            if (enemySpawnCount < maxEnemySpawnCount)
-            {
-                Instantiate(enemyPrefab, spawnPoint[Random.Range(0, spawnPoint.Length)].transform.position, Quaternion.identity);
-                enemySpawnCount++;
-            }
-
-            yield return new WaitForSeconds(2f);
-
-            StartCoroutine(EnemySpawn());
+            // Spawn enemy based on selected prefab
+            Instantiate(enemyPrefab, spawnPoint[Random.Range(0, spawnPoint.Length)].transform.position, Quaternion.identity);
+            enemySpawnCount++;
         }
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(EnemySpawn());
     }
 }
