@@ -1025,11 +1025,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e2d277394cc198543b82a2779b562b17,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: e2d277394cc198543b82a2779b562b17,
-        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -1440,19 +1435,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e2d277394cc198543b82a2779b562b17,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: e2d277394cc198543b82a2779b562b17,
-        type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 813979eeadae46e4f914d6145e46bfbb, type: 2}
-    - target: {fileID: 5866666021909216657, guid: e2d277394cc198543b82a2779b562b17,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5930288569861748779, guid: e2d277394cc198543b82a2779b562b17,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1944,4 +1929,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMaxHP: 10
-  enemyCurrentHP: 0
+  enemyCurruntHP: 0
