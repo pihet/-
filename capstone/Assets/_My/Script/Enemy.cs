@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+    public static Enemy instance;
     [SerializeField]
     private float enemyMaxHP = 10;
     public float enemyCurrentHP = 0;
@@ -37,13 +38,14 @@ public class Enemy : MonoBehaviour
     {
         if (!GameManager.instance.isLive)
             return;
+        float remainTime = GameManager.instance.maxGameTime - GameManager.instance.gameTime;
 
         if (hp > enemyCurrentHP)
         {
             animator.SetTrigger("Hit");
             hp -= 1;
         }
-        if (enemyCurrentHP <= 0)
+        if (enemyCurrentHP <= 0 || remainTime == 0)
         {
             StartCoroutine(EnemyDie());
             return;
@@ -102,15 +104,15 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ChangeSpeedAfterDelay(float delay, float newSpeed)
     {
-        // agentÀÇ ¼Óµµ¸¦ 0À¸·Î ¼³Á¤
+        // agentï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         agent.speed = 0;
         handCollider.enabled = true;
         animator.SetTrigger("Attack");
 
-        // delayÃÊ µ¿¾È ´ë±â
+        // delayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(delay);
 
-        // delay°¡ Áö³­ ÈÄ agentÀÇ ¼Óµµ¸¦ newSpeed·Î º¯°æ
+        // delayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ agentï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ newSpeedï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         agent.speed = newSpeed;
         handCollider.enabled = false;
     }

@@ -79,6 +79,10 @@ public class GameManager : MonoBehaviour
         
         if(gameTime > maxGameTime){
             gameTime = maxGameTime;
+            float remainTime = maxGameTime - gameTime;
+            if(remainTime == 0){
+                Invoke("VictoryScene", 3f);
+            }
         }
     }
 
@@ -169,5 +173,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         StartCoroutine(EnemySpawn());
+    }
+    public void VictoryScene(){
+        SceneManager.LoadScene(3);
     }
 }
