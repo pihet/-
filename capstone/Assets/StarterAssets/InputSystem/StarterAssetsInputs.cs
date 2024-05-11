@@ -17,6 +17,7 @@ namespace StarterAssets
         public bool aim;
         public bool shoot;
         public bool reload;
+        public bool melee;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -78,6 +79,13 @@ namespace StarterAssets
                 ReloadInput(value.isPressed);
             }
         }
+        public void OnMelee(InputValue value)
+        {
+            if (GameManager.instance.isLive)
+            {
+                MeleeInput(value.isPressed);
+            }
+        }
 #endif
 
 
@@ -131,6 +139,13 @@ namespace StarterAssets
             if (GameManager.instance.isLive)
             {
                 reload = newReloadState;
+            }
+        }
+        public void MeleeInput(bool newMeleeState)
+        {
+            if (GameManager.instance.isLive)
+            {
+                melee = newMeleeState;
             }
         }
 

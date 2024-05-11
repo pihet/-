@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     Animator anim;
 
-    public float invincibilityTime = 1.5f; // 무적 상태 지속 시간 (초)
+    public float invincibilityTime = 1f; // 무적 상태 지속 시간 (초)
     public bool isInvincible = false;
 
     [SerializeField]
@@ -71,8 +71,9 @@ public class Player : MonoBehaviour
     {
         isInvincible = true;
         GetComponent<CharacterController>().enabled = false;
-        yield return new WaitForSeconds(invincibilityTime);
+        yield return new WaitForSeconds(0.1f);
         GetComponent<CharacterController>().enabled = true;
+        yield return new WaitForSeconds(invincibilityTime);
         isInvincible = false;
     }
 }
