@@ -4888,7 +4888,7 @@ GameObject:
   - component: {fileID: 1384143295}
   m_Layer: 0
   m_Name: Dead Cam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55141,6 +55141,7 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 5976754609344898238}
+  - {fileID: 616352287}
   - {fileID: 210858301}
   - {fileID: 575460712}
   - {fileID: 572844271}
@@ -55151,4 +55152,3 @@ SceneRoots:
   - {fileID: 1064704852}
   - {fileID: 1618117118}
   - {fileID: 1384143296}
-  - {fileID: 616352287}
