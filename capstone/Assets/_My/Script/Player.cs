@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Slider HPSlider;
 
-    private float playerMaxHP = 1;
+    private float playerMaxHP = 10;
     private float HP = 10;
     public float playerCurrentHP = 0;
     public float playerMinHP = 0;

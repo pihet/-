@@ -35,7 +35,7 @@ public class player_C : MonoBehaviour
             {
                 CameraSwitcher.SwitchCamera(DeadCam);
             }
-            Debug.Log("전환이 완료되었씁니다,");
+            
         }
     }
 }
