@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private int enemySpawnCount = 0;
-    private int maxEnemySpawnCount = 10;
+    private int maxEnemySpawnCount = 50;
 
     [Header("Game Control")]
     public bool isLive;
