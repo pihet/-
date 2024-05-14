@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 
         targetPlayer = GameObject.FindWithTag("Player");
 
+        handCollider.enabled = false;
         InitEnemyHP();
     }
 
@@ -106,6 +107,9 @@ public class Enemy : MonoBehaviour
     {
         // agent�� �ӵ��� 0���� ����
         agent.speed = 0;
+        handCollider.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+
         handCollider.enabled = true;
         animator.SetTrigger("Attack");
 
