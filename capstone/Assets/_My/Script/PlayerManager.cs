@@ -78,6 +78,13 @@ public class PlayerManager : MonoBehaviour
                 anim.SetTrigger("Melee");
             }
         }
+        else
+        {
+            if (input.melee)
+            {
+                input.melee = false;
+            }
+        }
     }
     private void AimCheck()
     {
