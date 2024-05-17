@@ -5,27 +5,34 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    public Button pauseButton;
+    public Button togglePauseButton;
     private bool isPaused = false;
 
     void Start()
     {
-        // 버튼에 클릭 리스너 추가
-        pauseButton.onClick.AddListener(TogglePause);
+        togglePauseButton.onClick.AddListener(TogglePause);
+        UpdateButtonText();
+    }
+
+    void Update()
+    {
+        // ESC 키 입력 처리
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 
     void TogglePause()
     {
-        if (isPaused)
-        {
-            // 게임을 다시 시작
-            GameManager.instance.Stop();
-        }
-        else
-        {
-            // 게임을 멈춤
-            GameManager.instance.Resume();
-        }
         isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
+        UpdateButtonText();
+    }
+
+    void UpdateButtonText()
+    {
+        Text buttonText = togglePauseButton.GetComponentInChildren<Text>();
+        buttonText.text = isPaused ? "||" : "▶";
     }
 }
