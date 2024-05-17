@@ -3794,6 +3794,7 @@ MonoBehaviour:
   rate: 0.4
   meleeArea: {fileID: 864346108}
   trailEffect: {fileID: 1450163976}
+  third: {fileID: 0}
 --- !u!1 &879926227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,6 +4110,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808796870556375048, guid: f765096f582a2f94e91beee19718c4ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6617808027575222962, guid: f765096f582a2f94e91beee19718c4ad,
         type: 3}
@@ -5645,7 +5651,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.11967659
+        value: 0.033067703
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -6136,6 +6142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264306116152274168, guid: 9e4591bd7b4aee04ba536e1bbf430872,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8789731303678834242, guid: 9e4591bd7b4aee04ba536e1bbf430872,
         type: 3}
@@ -51384,6 +51395,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1723795239314522585, guid: 587ef12367c2dd44cbe333943325a34d,
         type: 3}
+      propertyPath: cooltime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1723795239314522585, guid: 587ef12367c2dd44cbe333943325a34d,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -51441,6 +51457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449130847944298407, guid: 587ef12367c2dd44cbe333943325a34d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365066745522349727, guid: 587ef12367c2dd44cbe333943325a34d,
         type: 3}
@@ -54743,6 +54764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfe6dc824b39cb4fa2f99024729ac18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleetime: 1.5
+  meleetimer: 0
   aimCam: {fileID: 8921164298637716733}
   aimImage: {fileID: 462888048}
   aimObject: {fileID: 1521334719}
@@ -55718,8 +55741,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8944336655651534935}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.20000005, y: 1.7, z: -4}
+  m_LocalRotation: {x: 0.35714552, y: 0, z: 0, w: 0.9340488}
+  m_LocalPosition: {x: 0.535, y: 4.3523226, z: -2.8529153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55768,7 +55791,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 40
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1

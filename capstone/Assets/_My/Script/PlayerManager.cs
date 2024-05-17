@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour
     private Animator anim;
     private Sword swing;
 
+    public float meleetime = 1.5f;
+    public float meleetimer = 0.0f;
+
     [Header("Aim")]
     [SerializeField]
     private CinemachineVirtualCamera aimCam;
@@ -53,6 +56,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(!GameManager.instance.isLive)
             return;
+        meleetimer += Time.deltaTime;
 
         AimCheck();
         Melee();
@@ -73,9 +77,13 @@ public class PlayerManager : MonoBehaviour
         {
             if (input.melee)
             {
-                input.melee = false;
-                swing.Use();
-                anim.SetTrigger("Melee");
+                if (meleetimer > meleetime)
+                {
+                    swing.Use();
+                    anim.SetTrigger("Melee");
+                    meleetimer = 0.0f;
+                    input.melee = false;
+                }
             }
         }
         else
