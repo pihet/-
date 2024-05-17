@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour
         InitEnemyHP();
     }
 
+    public float cooltime;
+    public float currenttime;
+
     // Update is called once per frame
     void Update()
     {
@@ -72,14 +75,18 @@ public class Enemy : MonoBehaviour
 
             if (isRange)
             {
-                animator.SetBool("isRun", false);
-                StartCoroutine(EAttack());
+                if (currenttime <= 0)
+                {
+                    StartCoroutine(EAttack());
+                    currenttime = cooltime;
+                }
             }
             else
             {
                 animator.SetBool("isRun", true);
                 animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
             }
+            currenttime -= Time.deltaTime * 10;
             targetDelay = 0;
         }
     }
@@ -108,8 +115,8 @@ public class Enemy : MonoBehaviour
 
     IEnumerator EAttack()
     {
-        agent.ResetPath();
-        agent.speed = 0;
+        animator.SetBool("isRun", false);
+        agent.isStopped = true;
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.5f);
         handCollider.enabled = true;
@@ -120,5 +127,6 @@ public class Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         agent.speed = 2.5f;
+        agent.isStopped = false;
     }
 }
