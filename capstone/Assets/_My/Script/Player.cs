@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     Animator anim;
 
-    public float invincibilityTime = 1f; // ¹«Àû »óÅÂ Áö¼Ó ½Ã°£ (ÃÊ)
+    public float invincibilityTime = 1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½)
     public bool isInvincible = false;
 
     [SerializeField]
@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
     }
 
     // Update is called once per frame

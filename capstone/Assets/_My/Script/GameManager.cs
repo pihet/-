@@ -177,4 +177,16 @@ public class GameManager : MonoBehaviour
     public void VictoryScene(){
         SceneManager.LoadScene(3);
     }
+
+    public void Stop()
+    {
+        isLive = false;
+        Time.timeScale = 0;
+    }
+
+    public void Resume()
+    {
+        isLive = true;
+        Time.timeScale = 0;
+    }
 }
