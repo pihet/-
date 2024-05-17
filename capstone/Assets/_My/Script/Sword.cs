@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Sword : MonoBehaviour
     public float rate; //공격속도
     public BoxCollider meleeArea; //공격범위
     public TrailRenderer trailEffect; //이펙트
+    public ThirdPersonController third;
 
     public void Use()
     {
@@ -19,13 +21,13 @@ public class Sword : MonoBehaviour
 
     IEnumerator Swing()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(1f);
-        meleeArea.enabled = false;
+        yield return new WaitForSeconds(0.35f);
         trailEffect.enabled = false;
+        meleeArea.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

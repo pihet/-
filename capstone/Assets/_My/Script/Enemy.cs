@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+    public bool isRange;
     public static Enemy instance;
     [SerializeField]
     private float enemyMaxHP = 10;
@@ -23,6 +24,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 30;
+
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyCollider = GetComponent<CapsuleCollider>();
@@ -63,14 +66,14 @@ public class Enemy : MonoBehaviour
             }
 
             agent.destination = targetPlayer.transform.position;
-            transform.LookAt(targetPlayer.transform.position);
+            //transform.LookAt(targetPlayer.transform.position);
 
-            bool isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
+            isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
 
             if (isRange)
             {
                 animator.SetBool("isRun", false);
-                StartCoroutine(ChangeSpeedAfterDelay(2f, 2.5f));
+                StartCoroutine(EAttack());
             }
             else
             {
@@ -103,21 +106,19 @@ public class Enemy : MonoBehaviour
         enemyCollider.enabled = true;
     }
 
-    IEnumerator ChangeSpeedAfterDelay(float delay, float newSpeed)
+    IEnumerator EAttack()
     {
-        // agent�� �ӵ��� 0���� ����
+        agent.ResetPath();
         agent.speed = 0;
+        animator.SetBool("Attack", true);
+        yield return new WaitForSeconds(0.5f);
         handCollider.enabled = true;
-        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("Attack", false);
 
-        handCollider.enabled = true;
-        animator.SetTrigger("Attack");
-
-        // delay�� ���� ���
-        yield return new WaitForSeconds(delay);
-
-        // delay�� ���� �� agent�� �ӵ��� newSpeed�� ����
-        agent.speed = newSpeed;
+        yield return new WaitForSeconds(0.5f);
         handCollider.enabled = false;
+
+        yield return new WaitForSeconds(1f);
+        agent.speed = 2.5f;
     }
 }
