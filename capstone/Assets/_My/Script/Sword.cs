@@ -28,6 +28,8 @@ public class Sword : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
         trailEffect.enabled = false;
         meleeArea.enabled = false;
+
+        yield return new WaitForSeconds(0.75f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +37,14 @@ public class Sword : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().enemyCurrentHP -= damage;
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<Enemy2>().enemyCurrentHP -= damage;
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<Enemy3>().enemyCurrentHP -= damage;
         }
     }
 }

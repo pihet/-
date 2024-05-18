@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class Enemy : MonoBehaviour
+public class Enemy3 : MonoBehaviour
 {
     public bool isRange;
     public static Enemy instance;
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
         enemyCollider.enabled = false;
 
         yield return new WaitForSeconds(3f);
-        Destroy(gameObject);        
+        Destroy(gameObject);
         gameObject.SetActive(false);
         InitEnemyHP();
         agent.speed = 2.5f;
@@ -118,14 +118,14 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isRun", false);
         agent.isStopped = true;
         animator.SetBool("Attack", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         handCollider.enabled = true;
         animator.SetBool("Attack", false);
 
         yield return new WaitForSeconds(0.5f);
         handCollider.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         agent.speed = 2.5f;
         agent.isStopped = false;
     }

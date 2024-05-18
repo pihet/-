@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class EnenmyAttack : MonoBehaviour
 {
+    public float damage;
     private BoxCollider handCollider;
     public Image bloodScreen;
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class EnenmyAttack : MonoBehaviour
                 if (playerComponent.isInvincible == false)
                 {
                     //Debug.Log("Hit");
-                    playerComponent.playerCurrentHP -= 1;
+                    playerComponent.playerCurrentHP -= damage;
                     StartCoroutine(ShowBloodScreen());
                 }
             }
