@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Control")]
     public bool isLive;
     public float gameTime;
-    public float maxGameTime = 2 * 10f;
+    public float maxGameTime = 10 * 10f;
 
     [Header("Bullet")]
     [SerializeField]

@@ -146,7 +146,7 @@ public class PlayerManager : MonoBehaviour
                 targetAim.y = transform.position.y;
                 Vector3 aimDir = (targetAim - transform.position).normalized;
 
-                transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 50f);
+
                 SetRigWeight(1);
                 if (input.shoot)
                 {

@@ -24,7 +24,7 @@ public class Enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();

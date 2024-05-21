@@ -1,4 +1,6 @@
+using Cinemachine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -6,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     public bool isRange;
+    public bool followRange;
     public static Enemy instance;
     [SerializeField]
     private float enemyMaxHP = 10;
@@ -35,8 +38,12 @@ public class Enemy : MonoBehaviour
 
         handCollider.enabled = false;
         InitEnemyHP();
+
+        followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= 5;
     }
 
+    public float cooltime;
+    public float currenttime;
     // Update is called once per frame
     void Update()
     {
@@ -70,15 +77,32 @@ public class Enemy : MonoBehaviour
 
             isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
 
-            if (isRange)
+            if (followRange)
             {
-                animator.SetBool("isRun", false);
-                StartCoroutine(EAttack());
+                agent.isStopped = false;
+                followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= 10;
+
+                if (isRange)
+                {
+                    animator.SetBool("isRun", false);
+                    if (currenttime <= 0)
+                    {
+                        StartCoroutine(EAttack());
+                        currenttime = cooltime;
+                    }
+                }
+                else
+                {
+                    animator.SetBool("isRun", true);
+                    animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
+                }
+                currenttime -= Time.deltaTime * 10;
             }
             else
             {
-                animator.SetBool("isRun", true);
-                animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
+                animator.SetBool("isRun", false);
+                agent.isStopped = true;
+                followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= 5;
             }
             targetDelay = 0;
         }
@@ -109,6 +133,7 @@ public class Enemy : MonoBehaviour
     IEnumerator EAttack()
     {
         agent.ResetPath();
+        transform.LookAt(targetPlayer.transform.position);
         agent.speed = 0;
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.5f);
