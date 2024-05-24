@@ -7,13 +7,13 @@ public class Player : MonoBehaviour
 {
     Animator anim;
 
-    public float invincibilityTime = 1f; // ¹«Àû »óÅÂ Áö¼Ó ½Ã°£ (ÃÊ)
+    public float invincibilityTime = 1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½)
     public bool isInvincible = false;
 
     [SerializeField]
     private Slider HPSlider;
 
-    private float playerMaxHP = 10;
+    public float playerMaxHP = 10;
     private float HP = 10;
     public float playerCurrentHP = 0;
     public float playerMinHP = 0;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         HPSlider.value = playerCurrentHP / playerMaxHP;
-        if (playerCurrentHP < HP)
+        if (playerCurrentHP < HP && playerCurrentHP <= 10)
         {
             if (playerCurrentHP > 0)
             {
