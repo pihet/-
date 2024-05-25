@@ -34,9 +34,23 @@ public class Sword : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy>().enemyCurrentHP -= damage;
-            other.gameObject.GetComponent<Enemy2>().enemyCurrentHP -= damage;
-            other.gameObject.GetComponent<Enemy3>().enemyCurrentHP -= damage;
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.enemyCurrentHP -= damage;
+            }
+
+            Enemy2 enemy2 = other.gameObject.GetComponent<Enemy2>();
+            if (enemy2 != null)
+            {
+                enemy2.enemyCurrentHP -= damage;
+            }
+
+            Enemy3 enemy3 = other.gameObject.GetComponent<Enemy3>();
+            if (enemy3 != null)
+            {
+                enemy3.enemyCurrentHP -= damage;
+            }
         }
     }
 }

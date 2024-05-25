@@ -15,6 +15,18 @@ public class Enemy : MonoBehaviour
     public float enemyCurrentHP = 0;
     private float hp = 10;
 
+    [Header("Distance")]
+    [SerializeField]
+    private float FirstDistance = 5;
+    [SerializeField]
+    private float FollowDistance = 10;
+
+    [Header("Cooltime")]
+    [SerializeField]
+    private float cooltime;
+    [SerializeField]
+    private float currenttime;
+
     private NavMeshAgent agent;
     private Animator animator;
 
@@ -39,11 +51,8 @@ public class Enemy : MonoBehaviour
         handCollider.enabled = false;
         InitEnemyHP();
 
-        followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= 5;
+        followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= FirstDistance;
     }
-
-    public float cooltime;
-    public float currenttime;
     // Update is called once per frame
     void Update()
     {
@@ -76,11 +85,11 @@ public class Enemy : MonoBehaviour
             //transform.LookAt(targetPlayer.transform.position);
 
             isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
-
+            
             if (followRange)
             {
                 agent.isStopped = false;
-                followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= 10;
+                followRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= FollowDistance;
 
                 if (isRange)
                 {

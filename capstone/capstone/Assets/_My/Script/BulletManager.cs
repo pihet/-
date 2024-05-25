@@ -42,12 +42,26 @@ public class BulletManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy>().enemyCurrentHP -= 1;
-            other.gameObject.GetComponent<Enemy2>().enemyCurrentHP -= 1;
-            other.gameObject.GetComponent<Enemy3>().enemyCurrentHP -= 1;
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.enemyCurrentHP -= 1;
+            }
+
+            Enemy2 enemy2 = other.gameObject.GetComponent<Enemy2>();
+            if (enemy2 != null)
+            {
+                enemy2.enemyCurrentHP -= 1;
+            }
+
+            Enemy3 enemy3 = other.gameObject.GetComponent<Enemy3>();
+            if (enemy3 != null)
+            {
+                enemy3.enemyCurrentHP -= 1;
+            }
+            DestroyBullet();
         }
-        DestroyBullet();
     }
 }
